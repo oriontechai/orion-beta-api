@@ -17,7 +17,7 @@ const ORION = `
     Sé muy preciso con tus respuestas y no te extiendas si no es necesario. Debes dar una sensación futurista. Si no sabes algo, di no lo sé.
 `
 
-const MODEL = "gpt-3.5-turbo"; // gpt-3.5-turbo (CHAT-GPT Model) || gpt-4
+const MODEL = "gpt-4"; // gpt-3.5-turbo (CHAT-GPT Model) || gpt-4
 
 export const getTestCompletion = async () => {
     const completion = await openai.createChatCompletion({
@@ -31,7 +31,7 @@ export const getTestCompletion = async () => {
     };
 }
 
-export const getCompletion = async ( {messages} ) => {
+export const getCompletion = async ({ messages }) => {
     let reqBody = [
         {
             role: "system",
@@ -46,18 +46,29 @@ export const getCompletion = async ( {messages} ) => {
         });
     });
 
-    const completion = await openai.createChatCompletion({
-        model: MODEL,
-        messages: reqBody,
-    });
+    try {
+        const completion = await openai.createChatCompletion({
+            model: MODEL,
+            messages: reqBody,
+        });
 
-    return{
-        text: completion.data.choices[0].message.content,
-        fromUser: false
-    };
+        return {
+            text: completion.data.choices[0].message.content,
+            fromUser: false
+        };
+
+    } catch (error) {
+        console.log(error.message);
+        return {
+            text: "",
+            fromUser: false
+        };
+    }
+
+    
 }
 
-export const getClientCompletion = async ( {messages, context} ) => {
+export const getClientCompletion = async ({ messages, context }) => {
     let reqBody = [
         {
             role: "system",
@@ -71,14 +82,24 @@ export const getClientCompletion = async ( {messages, context} ) => {
             content: msg.text
         });
     });
-    
-    const completion = await openai.createChatCompletion({
-        model: MODEL,
-        messages: reqBody,
-    });
 
-    return{
-        text: completion.data.choices[0].message.content,
-        fromUser: false
-    };
+    try {
+        const completion = await openai.createChatCompletion({
+            model: MODEL,
+            messages: reqBody,
+        });
+
+        return {
+            text: completion.data.choices[0].message.content,
+            fromUser: false
+        };
+    } catch (error) {
+        console.log(error.message);
+        return {
+            text: "",
+            fromUser: false
+        };
+    }
+
+    
 }
