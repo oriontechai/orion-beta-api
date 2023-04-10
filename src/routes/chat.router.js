@@ -16,7 +16,7 @@ router.post("/api/v1/chat/get-completion", messageCompletion);
 router.get("/api/v1/chat/update-data", updateBotData);
 
 router.post("/api/v1/chat/test-emb", testEmbedding);
-
+//ccc
 // CLIENT
 router.post("/api/v1/chat/client/get-completion", clientMessageCompletion);
 
