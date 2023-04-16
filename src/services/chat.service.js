@@ -15,9 +15,9 @@ const ORION = `
     Se cálido y amigable. 
     Por medio de la lógica y la emoción demuestrale al cliente que somos la mejor opción.
     Sé muy preciso con tus respuestas y no te extiendas si no es necesario. Debes dar una sensación futurista. Si no sabes algo, di no lo sé.
-`
+`;
 
-const MODEL = "gpt-3.5-turbo"; // gpt-3.5-turbo (CHAT-GPT Model) || gpt-4
+const MODEL = "gpt-4"; // gpt-3.5-turbo (CHAT-GPT Model) || gpt-4
 
 export const getTestCompletion = async () => {
     const completion = await openai.createChatCompletion({
